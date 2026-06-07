@@ -1,0 +1,279 @@
+/* ===== RESET / NORMALIZE ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* ===== ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ===== */
+:root {
+  --color-bg: #f1f2f6;
+  --color-surface: #ffffff;
+  --color-accent: #3b82f6;
+  --color-accent-hover: #2563eb;
+  --color-text: #1e293b;
+  --color-text-light: #475569;
+  --border-radius: 1rem;
+  --transition-default: all 0.3s ease;
+}
+
+/* ===== СТИЛИ СТРАНИЦЫ ===== */
+.page {
+  min-height: 100vh;
+  background-color: var(--color-bg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    sans-serif;
+  padding: 2rem 1.5rem;
+}
+
+.page__title {
+  font-size: 2rem;
+  margin: 0 0 1.5rem 0;
+  color: var(--color-text);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-align: center;
+}
+
+.page__footer {
+  margin-top: 3rem;
+  font-size: 0.875rem;
+  color: var(--color-text-light);
+  text-align: center;
+}
+
+/* ===== ОСНОВНОЙ СЛАЙДЕР ===== */
+.slider {
+  max-width: 70rem;
+  width: 100%;
+  background-color: var(--color-surface);
+  border-radius: var(--border-radius);
+  box-shadow: 0 0.625rem 1.875rem rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+}
+
+/* прячем радио-кнопки (они только для хранения состояния) */
+.slider__radio {
+  display: none;
+}
+
+/* контентная область: картинки + текст */
+.slider__content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+  overflow: hidden;
+}
+
+/* ===== КОНТЕЙНЕР С КАРТИНКАМИ (ГОРИЗОНТАЛЬНЫЙ РЯД) ===== */
+.slider__images {
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
+  transition: transform 0.45s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+  will-change: transform;
+}
+
+.slider__image-item {
+  flex: 0 0 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slider__img {
+  width: 100%;
+  max-height: 28rem;
+  object-fit: contain;
+  border-radius: 0.75rem;
+  background-color: #eef2ff;
+  display: block;
+}
+
+/* ===== БЛОК ПОДПИСЕЙ (ТАКЖЕ АНИМИРУЕТСЯ) ===== */
+.slider__captions {
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
+  transition: transform 0.45s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+  will-change: transform;
+}
+
+.slider__caption {
+  flex: 0 0 100%;
+  font-size: 1.1rem;
+  line-height: 1.4;
+  font-weight: 500;
+  color: var(--color-text);
+  background-color: #f8fafc;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  border-left: 0.25rem solid var(--color-accent);
+}
+
+/* ===== ПАНЕЛЬ УПРАВЛЕНИЯ ===== */
+.slider__controls {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+/* кнопки-буллеты — кликабельная область */
+.slider__control-btn {
+  display: inline-flex;
+  width: 3rem;
+  height: 3rem;
+  background-color: transparent;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: var(--transition-default);
+  align-items: center;
+  justify-content: center;
+}
+
+/* визуальный индикатор — кружок внутри кликабельной зоны! */
+.slider__control-btn::before {
+  content: '';
+  display: block;
+  width: 0.875rem;
+  height: 0.875rem;
+  background-color: #cbd5e1;
+  border-radius: 50%;
+  transition: var(--transition-default);
+}
+
+/* hover, active */
+.slider__control-btn:hover::before {
+  background-color: var(--color-accent);
+  transform: scale(1.2);
+}
+
+.slider__control-btn:active::before {
+  background-color: var(--color-accent-hover);
+  transform: scale(0.95);
+}
+
+/* ===== УПРАВЛЕНИЕ СЛАЙДАМИ (6 слайдов) ===== */
+/* слайд 1 */
+#slide1:checked ~ .slider__content .slider__images {
+  transform: translateX(0%);
+}
+#slide1:checked ~ .slider__content .slider__captions {
+  transform: translateX(0%);
+}
+
+/* слайд 2 */
+#slide2:checked ~ .slider__content .slider__images {
+  transform: translateX(-100%);
+}
+#slide2:checked ~ .slider__content .slider__captions {
+  transform: translateX(-100%);
+}
+
+/* слайд 3 */
+#slide3:checked ~ .slider__content .slider__images {
+  transform: translateX(-200%);
+}
+#slide3:checked ~ .slider__content .slider__captions {
+  transform: translateX(-200%);
+}
+
+/* слайд 4 */
+#slide4:checked ~ .slider__content .slider__images {
+  transform: translateX(-300%);
+}
+#slide4:checked ~ .slider__content .slider__captions {
+  transform: translateX(-300%);
+}
+
+/* слайд 5 */
+#slide5:checked ~ .slider__content .slider__images {
+  transform: translateX(-400%);
+}
+#slide5:checked ~ .slider__content .slider__captions {
+  transform: translateX(-400%);
+}
+
+/* слайд 6 */
+#slide6:checked ~ .slider__content .slider__images {
+  transform: translateX(-500%);
+}
+#slide6:checked ~ .slider__content .slider__captions {
+  transform: translateX(-500%);
+}
+
+/* ===== СТИЛИ АКТИВНЫХ КНОПОК (для 6 слайдов) ===== */
+#slide1:checked ~ .slider__controls label[for='slide1']::before,
+#slide2:checked ~ .slider__controls label[for='slide2']::before,
+#slide3:checked ~ .slider__controls label[for='slide3']::before,
+#slide4:checked ~ .slider__controls label[for='slide4']::before,
+#slide5:checked ~ .slider__controls label[for='slide5']::before,
+#slide6:checked ~ .slider__controls label[for='slide6']::before {
+  background-color: var(--color-accent);
+  width: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 0 0.125rem rgba(59, 130, 246, 0.3);
+}
+
+/* ===== АДАПТИВ (mobile-first) ===== */
+@media (max-width: 500px) {
+  .page {
+    padding: 1rem;
+  }
+  .slider {
+    padding: 1rem;
+  }
+  .slider__controls {
+    gap: 1rem;
+  }
+  .slider__control-btn {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+  .slider__caption {
+    font-size: 0.9rem;
+    padding: 0.5rem 0.75rem;
+  }
+  .slider__img {
+    max-height: 16rem;
+  }
+  .page__title {
+    font-size: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .slider {
+    margin: 0 auto;
+  }
+  .slider__caption {
+    font-size: 1.2rem;
+  }
+  .slider__img {
+    max-height: 26rem;
+  }
+}
+
+@media (min-width: 1400px) {
+  .slider {
+    max-width: 80rem;
+  }
+}
+
